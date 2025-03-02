@@ -85,10 +85,10 @@ export const updateProfile =async (req,res)=>{
         const userId =await req.user._id
         if(!profilePic) return res.status(400).json({message:"profile require"})
         const uploadedResponse =await cloudinary.uploader.upload(profilePic)
-        const updatedUser = await User.findByIdAndUpdate({userId},{profilePic:uploadedResponse.secure_url},{new:true})
+        const updatedUser = await User.findByIdAndUpdate(userId,{profilePic:uploadedResponse.secure_url},{new:true})
         res.status(200).json(updatedUser)
     } catch (error) {
-        console.log("error in update profile route:"+error.message)
+        console.log("error in update profile route:"+error)
     }
 }
 
