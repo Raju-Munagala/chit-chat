@@ -1,8 +1,10 @@
 import React from "react";
 import { useChatStore } from "../store/useChatStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 const ContactsSidebar = () => {
   const {users,selectedUser,setSelectedUser}=useChatStore()
+  const {onlineUsers} = useAuthStore()
   return (
     <div className="bg-pink-200 text-gray-800 w-full h-full">
       <h2 className="text-lg font-semibold p-4 border-b-2 border-gray-500">
@@ -26,10 +28,12 @@ const ContactsSidebar = () => {
               <div className="font-semibold text-base">{user.firstName}</div>
               <div
                 className={`text-sm ${
-                  "offline" === "online" ? "text-green-400" : "text-gray-400"
+                  onlineUsers.includes(user._id) ? "text-pink-600" : "text-gray-400"
                 }`}
               >
-                offline
+                {
+                  onlineUsers.includes(user._id) ? "online" : "offline"
+                }
               </div>
             </div>
           </li>

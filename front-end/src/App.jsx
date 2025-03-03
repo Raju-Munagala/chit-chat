@@ -9,11 +9,13 @@ import { useAuthStore } from "./store/useAuthStore";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { authUser, checkAuth, isCheckingAuth,login,signup} = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth,login,signup,onlineUsers} = useAuthStore();
+
+  console.log({onlineUsers})
 
   useEffect(() => {
     checkAuth();
-  }, [isCheckingAuth,login,signup]);
+  }, [checkAuth]);
 
   if (isCheckingAuth)
     return (

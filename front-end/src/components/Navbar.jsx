@@ -5,10 +5,8 @@ import { useChatStore } from '../store/useChatStore.js'
 
 const Navbar = () => {
   const {authUser,logout} = useAuthStore()
-  const {loggingOut} = useChatStore()
 
   const handleLogout = ()=>{
-    loggingOut()
     logout()
   }
   return (

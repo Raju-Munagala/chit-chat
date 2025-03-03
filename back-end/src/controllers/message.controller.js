@@ -1,6 +1,7 @@
 import User from "../models/user.model.js"
 import Message from "../models/message.model.js"
 import cloudinary from "../lib/cloudinary.js"
+import { getReceiverSocketId, io } from './../lib/socket.js';
 
 export const getUsersForSidebar = async(req,res)=>{
     try {
@@ -43,6 +44,12 @@ export const sendMessage = async (req,res)=>{
             image:imageUrl
         })
         await message.save()
+
+        const receiverSocketId = getReceiverSocketId(userToChatId)
+        console.log(receiverSocketId)
+        if(receiverSocketId){
+            io.to(userToChatId).emit("newMessage",message);
+        }
         res.status(200).json(message)
     } catch (error) {
         console.log("error in sendMessage route:"+error.message)
