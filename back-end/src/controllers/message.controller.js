@@ -17,7 +17,7 @@ export const getMessages = async(req,res)=>{
     try {
         const myId =await req.user._id
         const {id:userToChatId} =await req.params
-        const messages = await Message.find({$or:[{senderId:myId,receiverId:userToChatId},{senderId:userToChatId,receiverId:myId}]})
+        const messages = await Message.find({$or:[{senderId:myId,receiverId:userToChatId},{senderId:userToChatId,receiverId:myId}]}).select("-password")
         res.status(200).json(messages)
     } catch (error) {
         console.log("error in getMessages route:"+error.message);
@@ -30,7 +30,7 @@ export const sendMessage = async (req,res)=>{
         const {id:userToChatId} =await req.params
         const myId =await req.user._id
         const {text,image} =await req.body
-        if(!text || !image) return res.status(400).json({message:"add data before sending"})
+        if(!text && !image) return res.status(400).json({message:"add data before sending"})
         let imageUrl;
         if(image){
             const uploadedResponse =await cloudinary.uploader.upload(image)

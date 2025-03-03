@@ -1,8 +1,10 @@
 import React from "react";
+import { useChatStore } from "../store/useChatStore";
 
-const ContactsSidebar = ({ users, selectedUser, setSelectedUser }) => {
+const ContactsSidebar = () => {
+  const {users,selectedUser,setSelectedUser}=useChatStore()
   return (
-    <div className="bg-pink-200 text-gray-800 h-screen w-full">
+    <div className="bg-pink-200 text-gray-800 w-full h-full">
       <h2 className="text-lg font-semibold p-4 border-b-2 border-gray-500">
         Contacts
       </h2>

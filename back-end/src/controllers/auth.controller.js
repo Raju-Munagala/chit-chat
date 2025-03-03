@@ -27,7 +27,7 @@ export const signup =async (req,res)=>{
             await newUser.save()
 
             res.status(200).json({
-                id:newUser._id,
+                _id:newUser._id,
                 firstName:newUser.firstName,
                 email:newUser.email,
                 profilePic:newUser.profilePic,
@@ -57,7 +57,7 @@ export const login =async (req,res)=>{
         generateToken(user._id,res)
 
         res.status(200).json({
-            id:user._id,
+            _id:user._id,
             firstName:user.firstName,
             email:user.email,
             profilePic:user.profilePic
