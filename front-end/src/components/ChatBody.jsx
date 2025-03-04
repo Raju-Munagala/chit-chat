@@ -8,15 +8,13 @@ const ChatBody = () => {
   const { authUser } = useAuthStore();
 
   const messageEndRef = useRef(null)
-
-  console.log(authUser)
+  
   const messageTime = (dateAndTime) => {
     const d = new Date(dateAndTime);
     const hours = d.getHours();
     const minutes = d.getMinutes();
     return `${hours}:${minutes}`;
   };
-  console.log(messages);
   useEffect(() => {
     getMessages();
     subscribeToMessages()

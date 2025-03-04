@@ -11,8 +11,6 @@ import { Toaster } from "react-hot-toast";
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth,login,signup,onlineUsers} = useAuthStore();
 
-  console.log({onlineUsers})
-
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -23,8 +21,6 @@ const App = () => {
         <span className="loading loading-ring loading-lg"></span>
       </div>
     );
-
-  console.log({ authUser });
   return (
     <div>
       <Navbar />
