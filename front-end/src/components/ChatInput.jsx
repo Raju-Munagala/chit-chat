@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import { useChatStore } from '../store/useChatStore';
 
 const ChatInput = () => {
@@ -6,8 +7,27 @@ const ChatInput = () => {
   const [message, setMessage] = useState('');
   const [photo, setPhoto] = useState(null);
 
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
+  const compressImage = async (image) => {
+      
+      if (!image) return;
+      
+      const options = {
+        maxSizeMB: 0.05, // 50KB
+        maxWidthOrHeight: 512,
+        useWebWorker: true,
+      };
+  
+      try {
+        const compressedFile = await imageCompression(image, options);
+        return compressedFile
+      } catch (error) {
+        console.error("Error compressing image:", error);
+      }
+    };
+  
+
+  const handlePhotoChange =async (event) => {
+    const file =await compressImage(event.target.files[0]);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -30,7 +50,7 @@ const ChatInput = () => {
   };
 
   return (
-    <form className="px-4 bg-pink-200 absolute bottom-0 w-3/4">
+    <form className="px-4 pb-5 bg-pink-200 relative bottom-0 w-full ">
       {photo && (
         <div className="mb-4 relative">
           <img src={photo} alt="Preview" className="w-24 h-24 object-cover rounded bg-red-400" />
@@ -58,7 +78,7 @@ const ChatInput = () => {
             onChange={handlePhotoChange}
             className="hidden"
           />
-          <span className="p-2 bg-purple-500 text-white rounded">Add Photo</span>
+          <span className="p-2 bg-purple-500 text-white rounded text-nowrap">Add Photo</span>
         </label>
         <button
           onClick={handleSend}

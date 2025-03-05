@@ -15,11 +15,11 @@ const HomePage = () => {
   
 
   return (
-    <div className="h-screen flex">
-      <div className="w-1/4 h-full">
+    <div className="h-[90vh] flex">
+      <div className={`w-full sm:w-1/4 h-full ${selectedUser?"hidden sm:block":""}`}>
         <ContactsSidebar />
       </div>
-      <div className="w-3/4 border-l border-gray-500">
+      <div className={`w-full sm:w-3/4 border-l border-gray-500 ${selectedUser?"":"hidden sm:block"}`}>
         {selectedUser?<MainChatSection/>:<HomePageWelcome/>}
       </div>
     </div>

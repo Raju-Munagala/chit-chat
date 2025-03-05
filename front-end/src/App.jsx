@@ -22,7 +22,7 @@ const App = () => {
       </div>
     );
   return (
-    <div>
+    <div className="h-screen">
       <Navbar />
       
         <Routes>

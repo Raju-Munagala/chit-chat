@@ -28,7 +28,7 @@ const ChatBody = () => {
   },[messages.length])
 
   return (
-    <div className="flex flex-col p-4 bg-pink-200 h-4/6 overflow-y-auto">
+    <div className="flex flex-col p-4 h-5/6 bg-pink-200 overflow-y-scroll">
       {messages.map((message, index) => (
         <div
           key={index}
