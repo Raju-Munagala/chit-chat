@@ -1,0 +1,16 @@
+Backend steps :
+
+1. Head to backend folder 
+
+2. To create image, run this cmd  ->   docker build -t chat-backend .
+
+3. Run the created image ->   docker run --env-file .env -p 5001:5001 chat-backend  
+
+
+Front-end steps :
+
+1. Head to Frontend folder 
+
+2. Create front-end image, run this cmd  -> docker build -t chat-frontend .
+
+3. Run the created image using this cmd -> docker run --env-file .env -p 5173:80 chat-frontend 
